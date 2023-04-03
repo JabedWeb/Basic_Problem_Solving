@@ -1,1 +1,4 @@
 **/*.exe
+
+
+git rm --cached -r '*.exe'
