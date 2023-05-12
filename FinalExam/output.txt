@@ -1,4 +1,7 @@
-Capital - 6
-Small - 18
-Spaces - 5
- 
+Please enter the number
+1 0 0 0 0 
+0 1 0 0 0 
+0 0 1 0 1 
+0 0 0 1 0 
+0 0 0 0 1 
+No
