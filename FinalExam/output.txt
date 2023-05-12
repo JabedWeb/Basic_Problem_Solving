@@ -1,4 +1,4 @@
-Please enter the number
-1
-2
-Pathan
+Capital - 6
+Small - 18
+Spaces - 5
+ 
