@@ -19,7 +19,6 @@ Sample Output 0
 
 30 40
 
-
 */
 
 

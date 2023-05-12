@@ -3,20 +3,12 @@ Problem Statement
 
 You will be given a string S as input. The string will contain only English small alphabets and will not contain any spaces. You need to tell how many time each alphabets from a to z appears.
 
-Input Format
 
-Input will contain only S.
-Constraints
-
-1 <= |S| <= 1000; Here |S| means the length of S.
-Output Format
-
-Ouput in the format show in the sample output.
-Sample Input 0
-
+Sample Input
 thebrownfox
-Sample Output 0
 
+
+Sample Output
 a - 0
 b - 1
 c - 0
