@@ -1,8 +1,4 @@
-The output 4
-\*****/
-*\***/*
-**\*/**
-***X***
-**/*\**
-*/***\*
-/*****\
+Please enter the number
+4 -1 2 3 5 0 2 7 
+the total number 3
+-1 0 2 
