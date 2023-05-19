@@ -1,0 +1,2 @@
+Please enter the number
+Case 1 : Not Found
