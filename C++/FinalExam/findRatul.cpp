@@ -3,25 +3,15 @@
 using namespace std;
 
 
-string uppercase(string checkString) {
-    string s=checkString;
-    for(unsigned long long int i = 0; i < s.length(); i++) {
-        if(s[i] >= 'a' && s[i] <= 'z') {
-            s[i] = s[i] - 32;
-        }
-    }
-    return s;
-}
-
 int main() {
     string s;
     getline(cin, s);
 
     // convert string to uppercase
-   string sentence= uppercase(s);
+   string sentence=s;
    // cout << sentence << endl;
 
-    string name=uppercase("raTul");
+    string name="Ratul";
    // cout << name << endl;
 
 
@@ -35,15 +25,13 @@ int main() {
         findPosition = sentence.find(" "+name);
     }
             // if we get the name in the sentence middle then we give a space before and after the name
-        else {
+    else {
        findPosition = sentence.find(" "+name+" ");
     }
 
 
-    //cout << findPosition << endl;
-
     //check name is in the sentence or not
-    if(findPosition < sentence.length()) {
+    if(findPosition <= sentence.length()) {
         cout << "YES" << endl;
     } else {
         cout << "NO" << endl;
