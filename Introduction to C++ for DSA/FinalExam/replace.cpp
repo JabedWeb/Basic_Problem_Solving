@@ -51,7 +51,7 @@ int main()
         // cout << findPosition << endl;
         s.replace(findPosition, x.length(), "$");
         // to avoid every time find the string from the beginning
-        findPosition = s.find(x, findPosition + x.length());
+        //findPosition = s.find(x, findPosition + x.length());
         findPosition = s.find(x, findPosition + 1);
     }
 
