@@ -1,7 +1,1 @@
- Char | Code 
--------
-A | 0
-C | 100
-D | 101
-B | 110
-R | 111
+Maximum value: 28
