@@ -1,72 +1,68 @@
-import java.util.Scanner;
-import java.util.Arrays;
- class Edge implements Comparable<Edge>{
-    int source;
-    int destination;
-    int weight;
-    public int compareTo(Edge o){
-        return this.weight-o.weight;
-        // if(this.weight>o.weight)
-        //     return 1;
-        // else if(this.weight<o.weight)
-        //     return -1;
-        // else
-        //     return 0;
+import java.util.*;
+
+public class Kruskal {
+    static int[] parent;
+    static int[] sz;
+
+    static void makeSet(int v) {
+        parent[v] = v;
+        sz[v] = 1;
+    }
+
+    static int findSet(int v) {
+        if (v == parent[v])
+            return v;
+        return parent[v] = findSet(parent[v]);
+    }
+
+    static void unionSets(int a, int b) {
+        a = findSet(a);
+        b = findSet(b);
+
+        if (a != b) {
+            if (sz[a] < sz[b]) {
+                int temp = a;
+                a = b;
+                b = temp;
+            }
+            parent[b] = a;
+            sz[a] += sz[b];
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+
+        parent = new int[n + 1];
+        sz = new int[n + 1];
+        for (int i = 1; i <= n; i++)
+            makeSet(i);
+
+        List<int[]> edges = new ArrayList<>();
+        for (int i = 0; i < m; i++) {
+            int u = scanner.nextInt();
+            int v = scanner.nextInt();
+            int w = scanner.nextInt();
+            edges.add(new int[]{w, u, v});
+        }
+
+        edges.sort(Comparator.comparingInt(a -> a[0]));
+        int cost = 0;
+        for (int[] edge : edges) {
+            int w = edge[0];
+            int u = edge[1];
+            int v = edge[2];
+            int x = findSet(u);
+            int y = findSet(v);
+
+            if (x != y) {
+                cost += w;
+                unionSets(u, v);
+            }
+        }
+
+        System.out.println("Minimum cost is: " + cost);
     }
 }
-public class Kruskal {
-    public static void kruskals(Edge input[],int V){
-        Arrays.sort(input);
-        int count=0;
-        int k=0;
-        Edge output[]=new Edge[V-1];
-        int parent[]=new int[V];
-        for(int j=0;j<V;j++){
-            parent[j]=j;
-        }
-        while(count!=V-1){
-            Edge currentEdge=input[k];
-            int sourceparent=parentcall(parent,currentEdge.source);
-            int destinationparent=parentcall(parent,currentEdge.destination);
-            if(sourceparent!=destinationparent)
-            {
-                output[count]=currentEdge;
-                count++;
-                parent[sourceparent]=destinationparent;
-            }
-            k++;
-        }
-        for(int i=0;i<V-1;i++){
-            if(output[i].source<=output[i].destination)
-                System.out.println(output[i].source+" "+output[i].destination+" "+output[i].weight);
-            else
-                System.out.println(output[i].destination+" "+output[i].source+" "+output[i].weight);
-        }
-    }
-        public static int parentcall(int[] parent,int vertex){
-            if(vertex==parent[vertex])
-                return  vertex;
-            return parentcall(parent,parent[vertex]);
-        }
-
-
-
-
-
-
-
-
-        
-    public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
-        int V = s.nextInt();
-        int E = s.nextInt();
-        Edge input[]=new Edge[E];
-        for(int i=0;i<input.length;i++){
-            input[i]= new Edge();
-            input[i].source=s.nextInt();
-            input[i].destination=s.nextInt();
-            input[i].weight=s.nextInt();
-        }
-        kruskals(input,V);
-    }}
