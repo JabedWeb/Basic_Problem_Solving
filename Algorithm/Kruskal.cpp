@@ -1,77 +1,84 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int inf = 1e7;
+const int N = 9999;
+vector<int> parent(N);
+vector<int> sz(N);
+
+void make_set(int v)
+{
+    parent[v] = v;
+    sz[v] = 1;
+};
+
+int find_set(int v)
+{
+    if (v == parent[v])
+        return v;
+    return parent[v] = find_set(parent[v]);
+};
+
+void union_sets(int a, int b)
+{
+    a = find_set(a);
+    b = find_set(b);
+
+    if (a != b)
+    {
+        if (sz[a] < sz[b])
+            swap(a, b);
+        parent[b] = a;
+        sz[a] += sz[b];
+    }
+}
 
 int main()
 {
-    int n, m;
-    cin >> n >> m;
+    for (int i = 0; i < N; i++)
+        make_set(i);
 
-    vector<int> dist(n + 1, inf);
-    vector<vector<pair<int, int>>> graph(n + 1);
+    int n, m;
+    scanf("%d %d", &n, &m);
+
+    vector<vector<int>> edges;
 
     for (int i = 0; i < m; i++)
     {
         int u, v, w;
-        cin >> u >> v >> w;
-        graph[u].push_back({v, w});
-        graph[v].push_back({u, w});
+        scanf("%d %d %d", &u, &v, &w);
+        edges.push_back({w, u, v});
     }
-
-    int source;
-    cin >> source;
-
-    dist[source] = 0;
-
-    set<pair<int, int>> s;
-    for (int i = 1; i <= n; i++)
+    sort(edges.begin(), edges.end());
+    int cost = 0;
+    for (auto i : edges)
     {
-        if (dist[i] < inf)
-            cout << dist[i] << "\t";
+        int w = i[0];
+        int u = i[1];
+        int v = i[2];
+        int x = find_set(u);
+        int y = find_set(v);
+
+        if (x == y)
+            continue;
         else
-            cout << -1 << "\t";
+        {
+            cost = cost + w;
+            union_sets(u, v);
+        }
     }
-    cout << "\n";
 
-        // {wt, vertex}
-        s.insert({0, source});
-    while (!s.empty())
-    {
-        auto x = *(s.begin());
-        s.erase(x);
-        for (auto i : graph[x.second])
-        {
-            if (dist[i.first] > dist[x.second] + i.second)
-            {
-                s.erase({dist[i.first], i.first});
-                dist[i.first] = dist[x.second] + i.second;
-                s.insert({dist[i.first], i.first});
-            }
-        }
-        for (int i = 1; i <= n; i++)
-        {
-            if (dist[i] < inf)
-                cout << dist[i] << "\t";
-            else
-                cout << -1 << "\t";
-        }
-        cout << "\n";
-    }
-    cout << "final output: \t";
-    for (int i = 1; i <= n; i++)
-    {
-        if (dist[i] < inf)
-            cout << dist[i] << "\t";
-        else
-            cout << -1 << "\t";
-    }
+    cout <<"Minimum cost is: " << cost;
 }
 
 /*
-4 4
-1 2 24
-1 4 20
-3 1 3
-4 3 12
-1
+8 9
+1 2 5
+2 3 6
+4 3 2
+1 4 9
+3 5 5
+5 6 10
+6 7 7
+7 8 1
+8 5 1
+
 */

@@ -1,54 +1,87 @@
+import java.util.*;
 
-import java.util.Scanner;
 public class dijkstra {
+    static final int inf = (int) 1e7;
+
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
-        int V = s.nextInt();
-        int E = s.nextInt();
-        int[][] matrix=new int[V][V];
-        for(int i=0;i<E;i++){
-            int sv=s.nextInt();
-            int ev=s.nextInt();
-            int weight=s.nextInt();
-            matrix[sv][ev]=weight;
-            matrix[ev][sv]=weight;
-        }      
-        dijkstra(matrix);
-    }
-    public static void dijkstra(int[][] matrix)
-    {
-        boolean visited[]=new boolean[matrix.length];
-        int distance[]=new int[matrix.length];
-        distance[0]=0;
-        for(int i=1;i<distance.length;i++){
-            distance[i]=Integer.MAX_VALUE;
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        int m = input.nextInt();
+
+        List<List<Pair>> graph = new ArrayList<>(n + 1);
+        for (int i = 0; i <= n; i++) {
+            graph.add(new ArrayList<>());
         }
-        for(int i=0;i<matrix.length-1;i++)
-        {
-            int mindistancevertex=findmindistancevertex(distance,visited);
-            visited[mindistancevertex]=true;
-            for(int j=0;j<matrix.length;j++){
-                if(matrix[mindistancevertex][j]!=0 && !visited[j] ){
-                    if(distance[j]>distance[mindistancevertex]+matrix[mindistancevertex][j])
-                    {
-                        distance[j]=distance[mindistancevertex]+matrix[mindistancevertex][j];
-                    }
+
+        int[] dist = new int[n + 1];
+        Arrays.fill(dist, inf);
+
+        for (int i = 0; i < m; i++) {
+            int u = input.nextInt();
+            int v = input.nextInt();
+            int w = input.nextInt();
+            graph.get(u).add(new Pair(v, w));
+            graph.get(v).add(new Pair(u, w));
+        }
+
+        int source = input.nextInt();
+        input.close();
+
+        dist[source] = 0;
+
+        TreeSet<Pair> set = new TreeSet<>();
+        for (int i = 1; i <= n; i++) {
+            if (dist[i] < inf)
+                System.out.print(dist[i] + "\t");
+            else
+                System.out.print(-1 + "\t");
+        }
+        System.out.println();
+
+        set.add(new Pair(0, source));
+        while (!set.isEmpty()) {
+            Pair x = set.pollFirst();
+            int vertex = x.second;
+            for (Pair i : graph.get(vertex)) {
+                if (dist[i.first] > dist[vertex] + i.second) {
+                    set.remove(new Pair(dist[i.first], i.first));
+                    dist[i.first] = dist[vertex] + i.second;
+                    set.add(new Pair(dist[i.first], i.first));
                 }
             }
-
+            for (int i = 1; i <= n; i++) {
+                if (dist[i] < inf)
+                    System.out.print(dist[i] + "\t");
+                else
+                    System.out.print(-1 + "\t");
+            }
+            System.out.println();
         }
 
-        for(int i=0;i<matrix.length;i++){
-            System.out.println(i+" "+distance[i]);
+        System.out.print("final output: \t");
+        for (int i = 1; i <= n; i++) {
+            if (dist[i] < inf)
+                System.out.print(dist[i] + "\t");
+            else
+                System.out.print(-1 + "\t");
         }
-
     }
-    public static int findmindistancevertex(int[] distance,boolean[] visited){
-        int minvertex=-1;
-        for(int i=0;i<distance.length;i++){
-            if(!visited[i] && (minvertex==-1 || distance[i]<distance[minvertex]))
-                minvertex=i;
+
+    static class Pair implements Comparable<Pair> {
+        int first;
+        int second;
+
+        Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
         }
-        return minvertex;
+
+        @Override
+        public int compareTo(Pair other) {
+            if (this.first == other.first) {
+                return Integer.compare(this.second, other.second);
+            }
+            return Integer.compare(this.first, other.first);
+        }
     }
 }
