@@ -51,3 +51,8 @@ public class lcs {
         printLongestCommonSubsequence(seq1, seq2);
     }
 }
+
+
+
+
+// https://chatbot.theb.ai/#/chat/1002
