@@ -3,12 +3,12 @@ using namespace std;
 
 int main() {
     int numTests;
-    cout << "Enter the number of test cases: ";
+    cout << "Enter the number of test cases: "<<endl;
     cin >> numTests;
 
     while (numTests--) {
         int deep, ball, ans = 1;
-        cout << "Enter the depth and ball number: ";
+        cout << "Enter the depth and ball number: "<<endl;
         cin >> deep >> ball;
 
         for (int i = 1; i < deep; i++) {
