@@ -20,6 +20,7 @@ public class Sorting {
     }
 
     public static void printArray(char[] arr, int n) {
+
         System.out.print("writeln(");
         for (int i = 0; i < n; i++) {
             if (i != 0) System.out.print(",");
@@ -31,6 +32,7 @@ public class Sorting {
     public static void generatePascalProgram(char[] arr, char[] currentArrangement, int n, int count) {
         char[] newCurrentArrangement = new char[10];
         System.arraycopy(currentArrangement, 0, newCurrentArrangement, 0, n);
+
 
         for (int i = 0; i < count; i++) {
             if (i == count - 1) {
