@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Sorting {
 
-    public static void printabc(int n) {
+    public static void printAlphabet(int n) {
         if (n > 0) System.out.print("a");
         if (n > 1) System.out.print(",b");
         if (n > 2) System.out.print(",c");
@@ -13,50 +13,50 @@ public class Sorting {
         if (n > 7) System.out.print(",h");
     }
 
-    public static void printblank(int n) {
+    public static void printBlankSpace(int n) {
         for (int i = 0; i < n; i++) {
             System.out.print(" ");
         }
     }
 
-    public static void printarr(char ch[], int n) {
+    public static void printArray(char[] arr, int n) {
         System.out.print("writeln(");
         for (int i = 0; i < n; i++) {
             if (i != 0) System.out.print(",");
-            System.out.print(ch[i]);
+            System.out.print(arr[i]);
         }
         System.out.println(")");
     }
 
-    public static void pascal_program(char ch[], char cur[], int n, int cnt) {
-        char[] new_cur = new char[10];
-        System.arraycopy(cur, 0, new_cur, 0, n);
+    public static void generatePascalProgram(char[] arr, char[] currentArrangement, int n, int count) {
+        char[] newCurrentArrangement = new char[10];
+        System.arraycopy(currentArrangement, 0, newCurrentArrangement, 0, n);
 
-        for (int i = 0; i < cnt; i++) {
-            if (i == cnt - 1) {
-                printblank(cnt - 1);
+        for (int i = 0; i < count; i++) {
+            if (i == count - 1) {
+                printBlankSpace(count - 1);
                 System.out.println("else");
-                if (cnt < n) {
-                    pascal_program(ch, new_cur, n, cnt + 1);
+                if (count < n) {
+                    generatePascalProgram(arr, newCurrentArrangement, n, count + 1);
                 }
-                if (cnt == n) {
-                    printblank(cnt);
-                    printarr(new_cur, n);
+                if (count == n) {
+                    printBlankSpace(count);
+                    printArray(newCurrentArrangement, n);
                 }
             } else {
-                printblank(cnt - 1);
+                printBlankSpace(count - 1);
                 if (i != 0) System.out.print("else ");
-                System.out.println("if " + cur[cnt - i - 2] + " < " + ch[cnt - 1] + " then");
-                if (cnt < n) {
-                    pascal_program(ch, new_cur, n, cnt + 1);
+                System.out.println("if " + currentArrangement[count - i - 2] + " < " + arr[count - 1] + " then");
+                if (count < n) {
+                    generatePascalProgram(arr, newCurrentArrangement, n, count + 1);
                 }
-                if (cnt == n) {
-                    printblank(cnt);
-                    printarr(new_cur, n);
+                if (count == n) {
+                    printBlankSpace(count);
+                    printArray(newCurrentArrangement, n);
                 }
-                char temp = new_cur[cnt - i - 2];
-                new_cur[cnt - i - 2] = new_cur[cnt - i - 1];
-                new_cur[cnt - i - 1] = temp;
+                char temp = newCurrentArrangement[count - i - 2];
+                newCurrentArrangement[count - i - 2] = newCurrentArrangement[count - i - 1];
+                newCurrentArrangement[count - i - 1] = temp;
             }
         }
     }
@@ -64,41 +64,41 @@ public class Sorting {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int testcase = scanner.nextInt();
-        boolean ffff = false;
+        boolean isFirstTestcase = false;
 
         for (int i = 0; i < testcase; i++) {
             int n = scanner.nextInt();
-            if (ffff) System.out.println();
-            ffff = true;
+            if (isFirstTestcase) System.out.println();
+            isFirstTestcase = true;
             System.out.println("program sort(input,output);");
             System.out.println("var");
-            printabc(n);
+            printAlphabet(n);
             System.out.println(": integer;");
             System.out.println("begin");
             System.out.print("  readln(");
-            printabc(n);
+            printAlphabet(n);
             System.out.println(");");
 
-            char[] ch = new char[10];
-            char[] cur = new char[10];
-            ch[0] = 'a';
-            ch[1] = 'b';
-            ch[2] = 'c';
-            ch[3] = 'd';
-            ch[4] = 'e';
-            ch[5] = 'f';
-            ch[6] = 'g';
-            ch[7] = 'h';
-            cur[0] = 'a';
-            cur[1] = 'b';
-            cur[2] = 'c';
-            cur[3] = 'd';
-            cur[4] = 'e';
-            cur[5] = 'f';
-            cur[6] = 'g';
-            cur[7] = 'h';
+            char[] arr = new char[10];
+            char[] currentArrangement = new char[10];
+            arr[0] = 'a';
+            arr[1] = 'b';
+            arr[2] = 'c';
+            arr[3] = 'd';
+            arr[4] = 'e';
+            arr[5] = 'f';
+            arr[6] = 'g';
+            arr[7] = 'h';
+            currentArrangement[0] = 'a';
+            currentArrangement[1] = 'b';
+            currentArrangement[2] = 'c';
+            currentArrangement[3] = 'd';
+            currentArrangement[4] = 'e';
+            currentArrangement[5] = 'f';
+            currentArrangement[6] = 'g';
+            currentArrangement[7] = 'h';
             if (n > 1) {
-                pascal_program(ch, cur, n, 2);
+                generatePascalProgram(arr, currentArrangement, n, 2);
             } else {
                 System.out.println("  writeln(a);");
             }

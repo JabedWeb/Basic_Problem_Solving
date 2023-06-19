@@ -7,6 +7,8 @@ public class KnightMoves {
     static boolean[][] visited = new boolean[9][9];
 
     public static void bfs(int startRow, int startCol, int endRow, int endCol) {
+        System.out.println("Start: " + startRow + " " + startCol);
+        System.out.println("End: " + endRow + " " + endCol);
         int[] dx = {1, 1, -1, -1, 2, 2, -2, -2};
         int[] dy = {2, -2, 2, -2, 1, -1, 1, -1};
 
@@ -21,23 +23,36 @@ public class KnightMoves {
             Arrays.fill(row, false);
         }
 
+        // show 2D array of moveCount
+        for (int[] row : moveCount) {
+            for (int col : row) {
+                System.out.print(col + " ");
+            }
+            System.out.println();
+        }
+
         moveCount[startRow][startCol] = 0;
         queuePos[0][0] = startRow;
         queuePos[0][1] = startCol;
         visited[startRow][startCol] = true;
 
         for (int i = 0, k = 1; i < k; i++) {
+
             currentRow = queuePos[i][0];
             currentCol = queuePos[i][1];
+            System.out.println("Current 35: " + currentRow + " " + currentCol);
 
             if (currentRow == endRow && currentCol == endCol) {
+                      System.out.println("Current 38: " + currentRow + " " + currentCol);
                 minMoves = moveCount[currentRow][currentCol];
+                System.out.println("Min: " + minMoves);
                 break;
             }
 
             for (j = 0; j < 8; j++) {
                 nextRow = currentRow + dx[j];
                 nextCol = currentCol + dy[j];
+                System.out.println("Next 48: " + nextRow + " " + nextCol);
 
                 if (nextRow < 1 || nextRow > 8 || nextCol < 1 || nextCol > 8) {
                     continue;
@@ -48,6 +63,14 @@ public class KnightMoves {
 
                 visited[nextRow][nextCol] = true;
                 moveCount[nextRow][nextCol] = moveCount[currentRow][currentCol] + 1;
+                System.out.println("Move count 58: " + moveCount[nextRow][nextCol]);
+                        // show 2D array of moveCount
+                for (int[] row : moveCount) {
+                    for (int col : row) {
+                        System.out.print(col + " ");
+                    }
+                    System.out.println();
+                }
                 queuePos[k][0] = nextRow;
                 queuePos[k][1] = nextCol;
                 k++;

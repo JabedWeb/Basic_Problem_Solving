@@ -21,9 +21,8 @@ public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     System.out.print("Enter the number of test cases: ");
     int numTests = scanner.nextInt();
-
+    System.out.print("Enter the depth and ball number: ");
     while (numTests-- > 0) {
-        System.out.print("Enter the depth and ball number: ");
         int depth = scanner.nextInt();
         int ballNumber = scanner.nextInt();
         bound = 1; // Initialize bound to 1
