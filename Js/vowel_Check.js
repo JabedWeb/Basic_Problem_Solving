@@ -1,6 +1,6 @@
 // Write a code on how to calculate the number of vowels and consonants in a string?(Use Javascript only)
 
-let string = "jabed";
+let string = "abul";
 
 let vowel = 0;
 let consonant = 0;

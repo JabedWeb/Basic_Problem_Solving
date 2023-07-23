@@ -44,14 +44,55 @@ class Node {
     }
 };
 
-void insert_at_tail()
+void insert_at_tail( Node* &head, Node* &tail, int value) {
+    if(head==NULL){
+        Node *newNode=new Node(value);
+        head=newNode;
+        tail=newNode;
+    }
+    else {
+        Node *newNode=new Node(value);
+        tail->next=newNode;
+        tail=newNode;
+    }
+    
+}
+
+// void print_node(Node *head) {
+//     Node *temp=head;
+//     while(temp!=NULL){
+//         cout<<temp->value<<" ";
+//         temp=temp->next;
+//     }
+// }
+
+void print_node(Node *head) {
+   Node *temp=head;
+    int max=INT_MIN;
+    int min=INT_MAX;
+    while(temp!=NULL){
+        if(temp->value>max){
+            max=temp->value;
+        }
+        if(temp->value<min){
+            min=temp->value;
+        }
+        temp=temp->next;
+    }
+    cout << max  <<" "<<  min <<endl;
+}
 
 int main() {
     Node *head=NULL;
-    cout <<"Option 1 : Insert at tail"<<endl;
-    int op;
-    cin >>op;
-    if(op==1){
+    Node *tail=NULL;
 
+    while(true){
+        int x;
+        cin>>x;
+        if(x==-1){
+            break;
+        }
+        insert_at_tail(head,tail,x);
     }
+    print_node(head);
 }
