@@ -1,126 +1,145 @@
-#include <bits/stdc++.h>
+/*
+Problem Statement
+
+You are given a doubly linked list of strings. These strings refer to web addresses without any spaces. You will be given Q queries. In each query you will be given some commands. Type of commands are -
+
+visit address - You need to go to that address from where you are in that list and print that address if it is in the list. Otherwise print "Not Available".
+next - You need to go to the next address from where you are in that list and print that address if it is in the list. Otherwise print "Not Available".
+prev - You need to go to the previous address from where you are in that list and print that address if it is in the list. Otherwise print "Not Available".
+Note: You can use Linked List or STL List to solve this problem.
+
+Input Format
+
+First line will contain the values of the doubly linked list, and will terminate with the string "end".
+Second line will contain Q.
+Next Q lines will contain the commands. It is guranteed that you will get "visit address" command at first which will contain a valid address. It will not contain valid address everytime!
+Constraints
+
+1 <= N <= 1000; Here N is the maximum number of nodes of the linked list.
+1 <= Q <= 1000;
+1 <= |Address| <= 100; Here |Address| is the length of the string address.
+Output Format
+
+For each query output as asked.
+Sample Input 0
+
+facebook google phitron youtube twitter end
+12
+visit phitron
+prev
+prev
+prev
+prev
+next
+visit twitter
+next
+next
+prev
+visit django
+prev
+Sample Output 0
+
+phitron
+google
+facebook
+Not Available
+Not Available
+google
+twitter
+Not Available
+Not Available
+youtube
+Not Available
+phitron
+
+*/
+#include <iostream>
 using namespace std;
 
 class Node {
 public:
-    int val;
+    string val;
     Node* prev;
     Node* next;
-    Node(int val) {
+
+    Node(string val) {
         this->val = val;
         this->prev = NULL;
         this->next = NULL;
     }
 };
 
-int size(Node* head) {
-    Node* temp = head;
-    int count = 0;
-    while (temp != NULL) {
-        count++;
-        temp = temp->next;
-    }
-    return count;
-}
-
-void head_insertion(Node*& head, Node*& tail, int val) {
-    Node* newNode = new Node(val);
+void insert_at_tail(Node* &head, Node* &tail, string val) {
     if (head == NULL) {
+        Node* newNode = new Node(val);
         head = newNode;
         tail = newNode;
-        return;
-    }
-    newNode->next = head;
-    head->prev = newNode;
-    head = newNode;
-}
-
-void tail_insertion(Node*& head, Node*& tail, int val) {
-    Node* newNode = new Node(val);
-    if (tail == NULL) {
-        head = newNode;
+    } else {
+        Node* newNode = new Node(val);
+        tail->next = newNode;
+        newNode->prev = tail;
         tail = newNode;
-        return;
     }
-    tail->next = newNode;
-    newNode->prev = tail;
-    tail = tail->next;
 }
 
-void print_list_forward(Node* head) {
+void visit(Node* &current, Node* head, string val) {
     Node* temp = head;
-    cout << "L -> ";
     while (temp != NULL) {
-        cout << temp->val << " ";
+        if (temp->val == val) {
+            cout << val << endl;
+            current = temp;
+            return;
+        }
         temp = temp->next;
     }
-    cout << endl;
+    cout << "Not Available" << endl;
 }
 
-void print_list_backward(Node* tail) {
-    Node* temp = tail;
-    cout << "R -> ";
-    while (temp != NULL) {
-        cout << temp->val << " ";
-        temp = temp->prev;
+void next(Node* &current) {
+    if (current == NULL || current->next == NULL) {
+        cout << "Not Available" << endl;
+        return;
     }
-    cout << endl;
+    current = current->next;
+    cout << current->val << endl;
 }
 
-void insert_any_pos(Node*& head, Node*& tail, int pos, int val) {
-    if (pos < 0 || pos > size(head)) {
-        cout << "Invalid" << endl;
+void prev(Node* &current) {
+    if (current == NULL || current->prev == NULL) {
+        cout << "Not Available" << endl;
         return;
     }
-
-    if (pos == 0) {
-        head_insertion(head, tail, val);
-        return;
-    }
-
-    if (pos == size(head)) {
-        tail_insertion(head, tail, val);
-        return;
-    }
-
-    Node* newNode = new Node(val);
-    Node* temp = head;
-
-    for (int i = 1; i <= pos - 1; i++) {
-        temp = temp->next;
-    }
-
-    newNode->next = temp->next;
-    temp->next->prev = newNode;
-    temp->next = newNode;
-    newNode->prev = temp;
+    current = current->prev;
+    cout << current->val << endl;
 }
 
 int main() {
+    string val;
     Node* head = NULL;
     Node* tail = NULL;
 
+    while (cin >> val && val != "end") {
+        insert_at_tail(head, tail, val);
+    }
+
     int Q;
     cin >> Q;
+    string command, address;
+    cin >> command >> address;
 
-    for (int i = 0; i < Q; i++) {
-        int X, V;
-        cin >> X >> V;
+    Node* current = NULL;
+    // First visit
+    visit(current, head, address);
 
-        if (X == 0) {
-            head_insertion(head, tail, V);
-        } else if (X == size(head)) {
-            tail_insertion(head, tail, V);
-        } else if (X > size(head)) {
-            cout << "Invalid" << endl;
-            break;
-        } else {
-            insert_any_pos(head, tail, X, V);
-        }
-
-        if (head != NULL) {
-            print_list_forward(head);
-            print_list_backward(tail);
+    while (--Q) {
+        cin >> command;
+        if (command == "visit") {
+            cin >> address;
+            visit(current, head, address);
+        } else if (command == "next") {
+            next(current);
+        } else if (command == "prev") {
+            prev(current);
         }
     }
 
