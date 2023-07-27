@@ -1,9 +1,11 @@
-8
-1
-0 embappe
-0 neymar
-1 
-1
-0 messi
-1
-1
+10
+AABB
+BABA
+BBAA
+ABAB
+AAAB
+ABBB
+ABBA
+BAABAB
+BBBAABA
+AAABABBABB
