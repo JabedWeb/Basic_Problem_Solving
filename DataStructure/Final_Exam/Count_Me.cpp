@@ -35,32 +35,33 @@ papa 3
 
 */
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int main(){
-   int size;
-   cin >> size;
-   cin.get();
-   while(size--){
+
+int main() {
+    int size;
+    cin >> size;
+    cin.ignore();
+
+    while (size--) {
         string st;
         getline(cin, st);
         string word;
         stringstream ss(st);
-        map<string,int> mp;
-        while(ss>> word){
-            mp[word]++;
-        }
-        int max =0;
-        string firstSt;
+        map<string, int> mp;
+        int maxCount = 0;
+        string maxWord;
 
-        for(auto it = mp.begin(); it != mp.end();it++){
-            if(it->second > max){
-                max = it->second;
-                firstSt = it->first;
+        while (ss >> word) {
+            mp[word]++;
+            if (mp[word] > maxCount) {
+                maxCount = mp[word];
+                maxWord = word;
             }
         }
 
-        cout << firstSt << " " << max << endl;
+        cout << maxWord << " " << maxCount << endl;
     }
+
     return 0;
 }
