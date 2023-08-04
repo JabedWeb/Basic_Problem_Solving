@@ -1,5 +1,5 @@
 /*
-Question: Write a C++ program that takes N integer numbers and sorts them in non-increasing order using Merge Sort. 
+Question 1: Write a C++ program that takes N integer numbers and sorts them in non-increasing order using Merge Sort. 
 You can’t use any built-in function for sorting.
 */
 #include<bits/stdc++.h>
