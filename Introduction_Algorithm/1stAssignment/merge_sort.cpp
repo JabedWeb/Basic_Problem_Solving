@@ -1,14 +1,16 @@
 /*
 Question 1: Write a C++ program that takes N integer numbers and sorts them in non-increasing order using Merge Sort. 
 You can’t use any built-in function for sorting.
+
+7
+1 2 9 4 0 2 5
+
+9 5 4 2 2 1 0
 */
 #include<bits/stdc++.h>
 using namespace std;
 const int N = 1e5 + 5;
 int arr[N];
-
-
-
 
 void merge_conquer(int l,int r,int mid){
     int left_size = mid - l + 1;
