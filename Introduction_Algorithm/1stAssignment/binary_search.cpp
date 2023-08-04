@@ -31,7 +31,7 @@ void binary_search(int l,int r,int k){
 
     int mid = (l + r) / 2;
     if(arr[mid]==k){
-        cout<<"Found at index "<<mid<<endl;
+        cout<<mid<<endl;
         return;
     }
     if(k<arr[mid]){
