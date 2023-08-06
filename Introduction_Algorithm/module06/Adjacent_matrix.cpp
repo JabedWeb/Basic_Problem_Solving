@@ -11,7 +11,12 @@ int main() {
         int x,y;
         cin>>x>>y;
         adjacent[x][y]=1;
-       // adjacent[y][x]==1;
+        //for the undirected graph
+           // adjacent[y][x]==1;
+
+        //for the weighted graph
+          //  cin>>x>>y>>w;
+          //adjacent[x][y]=w
     }
     for(int i=1;i<=e;i++){
         for(int j=1;j<=e;j++){
