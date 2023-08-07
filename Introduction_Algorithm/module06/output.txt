@@ -1,7 +1,5 @@
-
-Height array 
-Node 1 height : 2
-Node 2 height : 1
-Node 3 height : 0
-Node 4 height : 0
-Node 5 height : 0
+List A : B C 
+List B : D F 
+List C : 
+List D : 
+List E : 
