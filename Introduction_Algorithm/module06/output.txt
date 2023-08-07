@@ -1,5 +1,5 @@
-1 2 4 5 3 
- height array 
+
+Height array 
 Node 1 height : 2
 Node 2 height : 1
 Node 3 height : 0

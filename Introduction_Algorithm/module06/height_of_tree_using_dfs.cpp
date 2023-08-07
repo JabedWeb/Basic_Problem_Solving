@@ -12,13 +12,9 @@ int height[N];
 void dfs(int u){
     // section 1 : actions after entering node u
     visited[u]=true;
-    cout << u << " " ;
-
     for(int v : adjacent[u]){
         //section 2 : actions before entering a new neighbor
         if(visited[v]==true) continue;
-
-         //depth[v]=depth[u]+1;
 
         dfs(v);
         //section 3 : actions after exiting a new neighbor
@@ -42,27 +38,7 @@ int main() {
 
     dfs(1);
 
-    // for(int i=1;i<=v;i++){
-    //     cout << "List " << i << ": ";
-    //     for(int j: adjacent[i]){
-    //         cout << j << " ";
-    //     }
-    //     cout<<endl;
-    // }
-
-    // cout << "\nvisiting array " << endl;
-
-    // for(int i =1;i<=v;i++){
-    //     cout << "Node" << i << " status : " <<visited[i] << endl;
-    // }
-
-    // cout << "\nv depth array " << endl;
-    // for(int i =1;i<=v;i++){
-    //     cout << "Node" << i << " depth : " <<depth[i] << endl;
-    // }
-
-
-    cout << "\n height array " << endl;
+    cout << "\nHeight array " << endl;
     for(int i =1;i<=v;i++){
         cout << "Node " << i << " height : " <<height[i] << endl;
     }
