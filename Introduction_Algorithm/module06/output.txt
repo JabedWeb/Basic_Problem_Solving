@@ -1,8 +1,7 @@
-1 2 4 3 
-visiting array 
-Node1 status : 1
-Node2 status : 1
-Node3 status : 1
-Node4 status : 1
-Node5 status : 0
-Node6 status : 0
+1 2 4 5 3 
+ height array 
+Node 1 height : 2
+Node 2 height : 1
+Node 3 height : 0
+Node 4 height : 0
+Node 5 height : 0
