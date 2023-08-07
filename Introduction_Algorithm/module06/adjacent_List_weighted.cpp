@@ -19,7 +19,7 @@ int main() {
     for(int i=1;i<=v;i++){
         cout<<"List " << i << " : ";
         for(auto j:adj[i]){
-            cout<< "("<< j.first<<" ," <<j.second <<"), ";
+            cout<< "("<< j.first<<"," <<j.second <<"), ";
         }
         cout<<endl;
     }
