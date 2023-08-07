@@ -6,25 +6,22 @@ const int N=1e3+7;
 vector <int> adjacent[N];
 
 bool visited[N];
-int depth[N];
 int height[N];    
 
 void dfs(int u,int df){
     visited[u]=true;
-    cout<< u <<endl;
     for(int v : adjacent[u]){
         if(visited[v]==true) continue;
-
-        depth[v]=depth[u]+1;
-        if(df==v){
-            cout <<" Depth of " << df <<" = " << depth[v]<<endl;
-        }
-        cout << "into" <<endl;
         dfs(v,df);
-        cout<<"dfs er pore " << u  <<endl;
         height[u] = max(height[u],height[v]+1);
+        cout<<u <<" : "<<height[u]<<endl;
+        if(df==u){
+            cout << "height of " << df << " : " << height[u]<<endl;
+        }
     }
-    cout <<"ami loop er bahire" <<endl;
+    if(df==u){
+        cout << "height of " << df << " : " << height[u]<<endl;
+    }
 }
 
 
@@ -37,10 +34,10 @@ int main() {
         adjacent[x].push_back(y);
         adjacent[y].push_back(x);
     }
-    int df;
-    cin>>df;
+    int hf;
+    cin>>hf;
 
-    dfs(1,df);
+    dfs(1,hf);
 
     return 0;
 }
