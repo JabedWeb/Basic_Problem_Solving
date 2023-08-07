@@ -1,1 +1,18 @@
- Depth of 4 = 2
+1
+into
+2
+into
+4
+ami loop er bahire
+dfs er pore 2
+into
+5
+ami loop er bahire
+dfs er pore 2
+ami loop er bahire
+dfs er pore 1
+into
+3
+ami loop er bahire
+dfs er pore 1
+ami loop er bahire

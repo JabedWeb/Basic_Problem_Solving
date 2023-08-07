@@ -11,6 +11,7 @@ int height[N];
 
 void dfs(int u,int df){
     visited[u]=true;
+    cout<< u <<endl;
     for(int v : adjacent[u]){
         if(visited[v]==true) continue;
 
@@ -18,13 +19,12 @@ void dfs(int u,int df){
         if(df==v){
             cout <<" Depth of " << df <<" = " << depth[v]<<endl;
         }
+        cout << "into" <<endl;
         dfs(v,df);
-        //parent er sathe sei neighbour er task complete
-        //tar sathe kaj ekhane
+        cout<<"dfs er pore " << u  <<endl;
+        height[u] = max(height[u],height[v]+1);
     }
-    //when some node value is null
-    //I mean no neighbour
-    // cout <<"ami loop er bahire" <<endl;
+    cout <<"ami loop er bahire" <<endl;
 }
 
 
