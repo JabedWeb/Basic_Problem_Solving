@@ -31,6 +31,7 @@ int main() {
         int x,y;
         cin>>x>>y;
         adjacent[x].push_back(y);
+        adjacent[y].push_back(x);
     }
     int df;
     cin>>df;
