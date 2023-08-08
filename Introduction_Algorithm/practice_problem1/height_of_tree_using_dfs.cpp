@@ -7,20 +7,27 @@ vector <int> adjacent[N];
 
 bool visited[N];
 int height[N];    
+int maxHeight=0;
 
 void dfs(int u,int df){
+
     visited[u]=true;
     for(int v : adjacent[u]){
         if(visited[v]==true) continue;
         dfs(v,df);
         height[u] = max(height[u],height[v]+1);
-        cout<<u <<" : "<<height[u]<<endl;
         if(df==u){
-            cout << "height of " << df << " : " << height[u]<<endl;
+            if(maxHeight<height[u]){
+                maxHeight =height[u];
+            }
+        //cout << "height of " << df << " : " << height[u]<<endl;
         }
     }
+
+    //for the leap node
     if(df==u){
-        cout << "height of " << df << " : " << height[u]<<endl;
+         maxHeight ==height[u];
+        //cout << "height of " << df << " : " << height[u]<<endl;
     }
 }
 
@@ -38,6 +45,8 @@ int main() {
     cin>>hf;
 
     dfs(1,hf);
+
+     cout << "height of " << hf << " : " << maxHeight<<endl;
 
     return 0;
 }
