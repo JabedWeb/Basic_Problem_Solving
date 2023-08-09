@@ -14,6 +14,22 @@ void dfs(int u){
     }
 }
 
+void bfs(int s){
+    queue<int> q;
+    q.push(s);
+    visited[s]=true;
+    while(!q.empty()){
+        int u =q.front();
+        cout <<"visiting Node : " << u << endl;
+        q.pop();
+        for(int v : adjacent[u]){
+            if(visited[v]==true) continue;
+            q.push(v);
+            visited[v]=true;
+        }
+    }
+}
+
 int main() {
     int v,e;
     cin >>v>>e;
@@ -28,7 +44,7 @@ int main() {
 
     for(int i=1;i<=v;i++){
         if(visited[i]==true) continue;
-         dfs(i);
+         bfs(i);
          cc++;
     }
     cout<<"\nconnected component "<<cc <<endl;
