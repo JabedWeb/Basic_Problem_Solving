@@ -38,14 +38,14 @@ int main() {
     // }
 
 
-    //bool cycleExists=false
-    // for(int i =1;i<=v;i++){
-    if(dfs(1)){
-        cout <<"cycle detected " <<endl;
+    bool cycleExists=false;
+    for(int i =1;i<=v;i++){
+      cycleExists |=dfs(i);
     }
-    else {
-        cout << "cycle not detected" <<endl;
-    }
-    // }
+    
+    if(cycleExists)
+     cout <<"cycle detected " <<endl;
+    else 
+    cout <<"cycle not detected " <<endl;
     
 }
