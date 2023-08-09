@@ -1,5 +1,2 @@
-visiting Node : 1
-visiting Node : 2
-visiting Node : 3
-visiting Node : 4
-visiting Node : 5
+1 2 4 5 3 6 7 
+connected component 2
