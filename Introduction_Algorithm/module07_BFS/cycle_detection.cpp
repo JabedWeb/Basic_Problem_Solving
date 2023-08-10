@@ -14,6 +14,7 @@ bool dfs(int u ,int p=-1) {
         if(visited[v]==true) return true;
         isExisted |=dfs(v,u);
     }
+    cout <<"Ok" <<endl;
     return isExisted;
 }
 
@@ -37,15 +38,15 @@ int main() {
     //     cout <<endl;
     // }
 
-
-    bool cycleExists=false;
-    for(int i =1;i<=v;i++){
-      cycleExists |=dfs(i);
-    }
+    cout << dfs(1) <<endl;
+    // bool cycleExists=false;
+    // for(int i =1;i<=v;i++){
+    //   cycleExists |=dfs(i);
+    // }
     
-    if(cycleExists)
-     cout <<"cycle detected " <<endl;
-    else 
-    cout <<"cycle not detected " <<endl;
+    // if(cycleExists)
+    //  cout <<"cycle detected " <<endl;
+    // else 
+    // cout <<"cycle not detected " <<endl;
     
 }

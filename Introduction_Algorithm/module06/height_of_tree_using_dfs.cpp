@@ -12,8 +12,8 @@ int height[N];
 void dfs(int u){
     // section 1 : actions after entering node u
     visited[u]=true;
-    cout << "visited " << u  <<endl;
-    for(int v : adjacent[u]){
+    cout << "parent " << u  <<endl;
+    for(int v : adjacent[u]){ 
         //section 2 : actions before entering a new neighbor
         if(visited[v]==true) {
             cout << " visited " << v <<endl;
@@ -25,7 +25,7 @@ void dfs(int u){
         // if(height[v]+1 >height[u]){
         //     height[u]=height[v]+1;
         // }
-        cout <<"Root " << u << " " << v << endl;
+        cout <<"parent " << u << " : " << v << endl;
         height[u] = max(height[u],height[v]+1);
     }
 
