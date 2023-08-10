@@ -79,6 +79,7 @@ const int N =1e5+7;
 vector <int> adjacent[N];
 bool visited[N];
 
+
 vector <int> dist(N,-1);
 
 void find_shortest_dist(int src){
@@ -88,10 +89,8 @@ void find_shortest_dist(int src){
     q.push(src);
 
     dist[src]=0;
-
     while (!q.empty()){
         int u=q.front();
-        //cout << u << " ";
         q.pop();
         for(int v : adjacent[u]){
             if(visited[v]) continue;
@@ -100,7 +99,6 @@ void find_shortest_dist(int src){
             visited[v]=true;
         }
     }
-
 }
 
 int main() {
@@ -118,11 +116,19 @@ int main() {
     while(t--){
         int src, des;
         cin >>src>>des;
+        if(src>v){
+            cout << "-1" << endl;
+            continue;
+        }
         for(int i =0;i<=v;i++){
             visited[i]=false;
             dist[i]=-1;
         }
+        
+    
         find_shortest_dist(src);
         cout << dist[des] << endl;
+
+   
     }
 }
