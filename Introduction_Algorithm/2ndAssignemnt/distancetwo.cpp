@@ -127,6 +127,8 @@ int main() {
             visited[i]=false;
             dist[i]=-1;
         }
+        // if sr and des are same then distance is 0
+        // but why it is not working then ?
         if(src==des){
             cout << 0<<endl;
             continue;
