@@ -71,69 +71,75 @@ Sample Output 1
 -1
 
 */
+
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 1e5 + 7;
-vector<int> adjacent[N];
+const int N =1e5+7;
+vector <int> adjacent[N];
 bool visited[N];
-int dist[N];
+vector <int> dist(N,-1);
+vector <int > desNode[N];
 
-void distanceStoD(int src, int des) {
-    for (int i = 0; i <= 1e5+7; i++) {
-        visited[i] = false;
-        dist[i] = -1; 
-    }
-    queue<int> q;
+
+void distanceStoD(int src,int des){
+
+    queue <int > q;
+    visited[src]=true;
     q.push(src);
-    visited[src] = true;
-    dist[src] = 0;
 
-    while (!q.empty()) {
-        int u = q.front();
+    desNode[src].push_back(src);
+
+    dist[src]=0;
+
+    while (!q.empty()){
+        int u=q.front();
         q.pop();
-        for (int v : adjacent[u]) {
-            if (!visited[v]) {
-                q.push(v);
-                visited[v] = true;
-                dist[v] = dist[u] + 1;
-                if (v == des) return;
+        for(int v : adjacent[u]){
+            if(visited[v]) continue;
+            q.push(v);
+            dist[v]=dist[u]+1;
+            visited[v]=true;
+            if(v==des){
+                desNode[des].push_back(dist[v]);
             }
         }
     }
+
 }
 
 int main() {
-    int v, e;
-    cin >> v >> e;
-    for (int i = 0; i < e; i++) {
-        int x, y;
-        cin >> x >> y;
+    int v,e;
+    cin>>v>>e;
+    for(int i =0;i<e;i++){
+        int x,y;
+        cin >>x>>y;
         adjacent[x].push_back(y);
         adjacent[y].push_back(x);
     }
 
     int t;
-    cin >> t;
-    while (t--) {
+    cin >>t;
+    while(t--){
         int src, des;
-        cin >> src >> des;
-
-        // if (src == des) {
-        //     cout << 0 << endl;
-        //     continue;
-        // }
-        // if (src > v || des > v) {
-        //     cout << -1 << endl;
-        //     continue;
-        // }
-        // if (adjacent[src].empty() || adjacent[des].empty()) {
-        //     cout << -1 << endl;
-        //     continue;
-        // }
-        distanceStoD(src, des);
-        cout << dist[des] << endl;
+        cin >>src>>des;
+        for(int i =0;i<=v;i++){
+            visited[i]=false;
+            dist[i]=-1;
+        }
+        if(src==des){
+            cout << 0<<endl;
+            continue;
+        }
+        if(src>v || des>v){
+            cout << -1<<endl;
+            continue;
+        }
+        
+        distanceStoD(src,des);
+        cout << dist[des]<<endl;
     }
-
+   
     return 0;
 }
+
