@@ -44,7 +44,7 @@ Sample Output 1
 2 3
 
 */
-
+//https://www.hackerrank.com/contests/assignment-02-a-introduction-to-algorithms-a-batch-03/challenges/components-4
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -81,6 +81,8 @@ int main() {
 
 
     for (int i = 0; i < N; i++) {
+        // there will be no component with single node
+        //adjacent array should not be empty
         if (!visited[i] && !adjacent[i].empty()) {
             components_count(i,i);
         }
