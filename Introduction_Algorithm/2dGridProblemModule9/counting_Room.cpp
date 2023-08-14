@@ -38,10 +38,15 @@ Output:
 */
 #include <bits/stdc++.h>
 using namespace std;
+
+typedef pair <int,int> pii;
+
 const int N =10e3+7;
 vector <string> g;
 int visited [N][N];
 int n,m;
+
+vector <pii> dire= {{0,-1},{0,1},{-1,0},{1,0}};
 
 bool isValid(int i ,int j){
     return (i>=0 && i<n && j>=0 && j<m);
@@ -52,11 +57,13 @@ void dfs(int i,int j){
     if(visited[i][j]) return;
     if(g[i][j]=='#') return;
     visited[i][j]=true;
-    dfs(i,j-1);
-    dfs(i,j+1);
-    dfs(i-1,j);
-    dfs(i+1,j);
-
+    for(auto d : dire){
+        dfs(i+d.first,j+d.second);
+    }
+    // dfs(i,j-1);
+    // dfs(i,j+1);
+    // dfs(i-1,j);
+    // dfs(i+1,j);
 }
 
 int main() {
