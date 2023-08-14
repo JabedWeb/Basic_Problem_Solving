@@ -9,14 +9,18 @@ vector <pii> adj[N];
 const int INF=10e9+7;
 vector <int> dist(N,INF);
 vector <bool> visited(N);
+int cnt=0;
 
 void dijkstra(int source){
+
 
     priority_queue<pii,vector<pii>,greater<pii>>pq;
     dist[source]=0;
     pq.push({dist[source],source});
 
     while(!pq.empty()){
+        
+        cnt++;
         int u =pq.top().second;
         pq.pop(); 
         visited[u]=true;
@@ -24,6 +28,7 @@ void dijkstra(int source){
         for(pii vPair:adj[u] ){
             int v=vPair.first;
             int w=vPair.second;
+            cnt++;
             if(visited[v]) continue;
             if(dist[v]>dist[u]+w){
                 dist[v]=dist[u]+w;
@@ -31,6 +36,7 @@ void dijkstra(int source){
             }
         }
     }
+    cout << cnt << endl;
 
 }
 
