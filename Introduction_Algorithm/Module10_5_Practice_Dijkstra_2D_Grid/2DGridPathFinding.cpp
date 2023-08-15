@@ -56,7 +56,7 @@ void bfs(int si,int sj){
         int i =uPair.first;
         int j =uPair.second;
         q.pop();
-        for(auto d : dire){
+        for(pii d : dire){
             int ni=i+d.first;
             int nj=j+d.second;
             if(isValid(ni,nj) && !visited[ni][nj] && g[ni][nj]!='x'){
