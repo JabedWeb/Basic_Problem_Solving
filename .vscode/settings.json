@@ -72,5 +72,8 @@
         "typeinfo": "cpp",
         "valarray": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "cSpell.words": [
+        "Warshall"
+    ]
 }
