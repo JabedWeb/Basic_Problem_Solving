@@ -61,6 +61,12 @@ int main() {
     for(int i =1;i<=n;i++){
         cout<<"Distance of " <<i << " " << d[i]<<endl; 
     }
+
+    ///////
+    cout <<endl;
+    for(auto edges : list_of_edges){
+        cout << edges.first.first << " " <<edges.first.second << " " << edges.second<<endl;
+    }
 } 
 
 
