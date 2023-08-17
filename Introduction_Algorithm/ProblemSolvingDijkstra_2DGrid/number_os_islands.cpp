@@ -66,6 +66,10 @@ public:
     void dfs(vector<vector<char>>& grid,int i,int j){
         int m =grid.size();
         int n=grid[0].size();
+        // let jodi m ==3 hoi then i jodi 2 hoi tar mane se gird er 
+        //moodde ache . but jodi 3 hoi i er value ? tar mane grid er 
+        //bahire cole gachi 
+        //thats why i >=m(3>=3 tokhon return hobe ,cause bahire cole gachi) not i>m (4>3 tokhon return hobe but eita thikh na ) ()
         if(i<0 ||i >=m || j<0 || j>=n || grid[i][j]=='0'){
             return ;
         }
