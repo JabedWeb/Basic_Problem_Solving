@@ -96,6 +96,15 @@ int main() {
     cin >>si >>sj >>di >>dj;
 
 
+
+    //its a interesting case 
+    // it may be same source and destination
+    if (si == di && sj == dj) {
+        cout << (g[si][sj] == '.' ? "YES" : "NO") << endl;
+        return 0;
+    }
+
+
     for(int i =0;i<n;i++){
         for(int j=0;j<m;j++){
             if(g[i][j]=='-') continue;
@@ -111,7 +120,7 @@ int main() {
 
     
   
-        cout <<"N0" <<endl;
+        cout <<"NO" <<endl;
     
 
     // cout << ct <<endl;
