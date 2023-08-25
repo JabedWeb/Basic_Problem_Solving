@@ -42,7 +42,16 @@ const int N=10e5+7;
 
 int n;
 
-vector <int> edges[N];
+vector <pair<int,int>> edges;
+
+bool compareEdges(pair<int,int> edg1,pair<int,int>edg2){
+    if(edg1.first==edg2.first){
+        return edg1.second < edg2.second;
+    }
+    else{
+        return edg1.first <edg2.first;
+    }
+}
 
 int main() {
 
@@ -51,16 +60,12 @@ int main() {
     for(int i =0;i<n;i++){
         long long int u,v;
         cin>>u>>v;
-        edges[u].push_back(v);
+        edges.push_back({u,v});
     }
 
+    sort(edges.begin(),edges.end(),compareEdges);
 
-    for(int i =0;i<=N;i++){
-        if(!edges[i].empty()){
-            sort(edges[i].begin(), edges[i].end());
-            for(int j : edges[i]){
-            cout << i << " " << j << endl;
-           }
-        }
-    } 
+    for(pair<int,int> edge : edges){
+        cout << edge.first << " " <<edge.second <<endl;
+    }
 }
