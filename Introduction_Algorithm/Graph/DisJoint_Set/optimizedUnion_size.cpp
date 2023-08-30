@@ -2,6 +2,7 @@
 using namespace std;
 
 int parent[1008];
+int parentSize[1008];
 
 int dsu_find(int n) {  
     while(parent[n]!=-1){
@@ -12,6 +13,7 @@ int dsu_find(int n) {
 void dsu_set(int n){
     for(int i =0;i<n;i++){
         parent[i]=-1;
+        parentSize[i]=1;
     }
 }
 
@@ -19,7 +21,14 @@ void dsu_union(int a,int b){
     int leaderA=dsu_find(a);
     int leaderB=dsu_find(b);
     if(leaderA!=leaderB){
-        parent[leaderB]=leaderA;
+        if(parentSize[leaderA]>parentSize[leaderB]){
+            parent[leaderB]=leaderA;
+            parentSize[leaderA]+=1;
+        }
+        else{
+            parent[leaderA]=leaderB;
+            parentSize[leaderB]+=1;
+        }
     }
 }
 
@@ -33,7 +42,7 @@ int main() {
         cin>>a>>b;
         dsu_union(a,b);
     }
-    cout <<dsu_find(7); 
+    cout <<dsu_find(10); 
 
 }
 
