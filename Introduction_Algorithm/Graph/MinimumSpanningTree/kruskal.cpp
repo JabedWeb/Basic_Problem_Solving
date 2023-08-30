@@ -1,6 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// for the dsu
+int parent[1008];
+int parentSize[1008];
+
 class Edge{
     public : 
     int a ,b,w;
@@ -10,14 +14,10 @@ class Edge{
         this->w=w;
     }
 };
-
+// for ascending order sort
 bool cmp(Edge a,Edge b){
     return a.w < b.w;
 };
-
-
-int parent[1008];
-int parentSize[1008];
 
 int dsu_find(int n) {  
     while(parent[n]!=-1){
@@ -74,3 +74,25 @@ int main() {
         cout <<va.a << " " << va.b << " " <<va.w <<endl;
     }
 }
+
+/*
+8 11
+1 5 2
+1 2 4
+1 4 10
+5 4 5
+2 4 8
+2 3 18
+3 4 11
+4 8 9
+4 7 11
+7 6 1
+8 6 2
+
+
+
+*/
+
+/*
+
+*/
