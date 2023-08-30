@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+ #include <bits/stdc++.h>
 using namespace std;
 
 int parent[1008];
@@ -42,16 +42,24 @@ int main() {
     for(int i =0;i<e;i++){
         int a,b;
         cin>>a>>b;
-        dsu_union(a,b);
+        int leaderA=dsu_find(a);
+        int leaderB=dsu_find(b);
+        if(leaderA==leaderB){
+            cout << "Cycle detected in between: " <<a << " " <<b <<endl;
+        }
+        else{
+            dsu_union(a,b);
+        }
+        
     }
-    cout <<dsu_find(5); 
 
 }
 
 /*
-7 4
-1 2 
+5 5
+1 2
+2 5
+1 4
 2 3
 4 5
-6 5
 */
