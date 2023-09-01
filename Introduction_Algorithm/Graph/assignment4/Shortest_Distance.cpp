@@ -1,80 +1,136 @@
 /*
+Shortest Distance
+Problem
+Submissions
+Leaderboard
+Discussions
+Problem Statement
 
+You'll be given a graph of N nodes and E edges. For each edge, you'll be given A, B and W which means there is an edge from A to B which will cost W. Also, you'll be given Q queries, for each query you'll be given X and Y, where X is the source and Y is the destination. You need to print the minimum cost from A to B for each query. If there is no connection between X and Y, print -1.
+
+Note: There can be multiple edges from one node to another.
+
+Input Format
+
+First line will contain N and E.
+Next E lines will contain A, B and W.
+After that you'll get Q.
+Next Q queries will contain X and Y.
+Constraints
+
+1 <= N <= 100
+1 <= E <= 10^5
+1 <= A, B <= N
+1 <= W <= 10^9
+1 <= Q <= 10^5
+1 <= X, Y <= N
+Output Format
+
+Output the minimum cost for each query.
+Sample Input 0
+
+4 7
+1 2 10
+2 3 5
+3 4 2
+4 2 3
+3 1 7
+2 1 1
+1 4 4
+6
+1 2
+4 1
+3 1
+1 4
+2 4
+4 2
+Sample Output 0
+
+7
+4
+6
+4
+5
+3
+Sample Input 1
+
+4 4
+1 2 4
+2 3 4
+3 1 2
+1 2 10
+6
+1 2
+2 1
+1 3
+3 1
+2 3
+3 2
+Sample Output 1
+
+4
+6
+8
+2
+4
+6
 */
-
 #include <bits/stdc++.h>
 using namespace std;
 
-// for the dsu
-int parent[1008];
-int parentSize[1008];
+typedef pair<int, long long int> pii;
 
-class Edge{
-    public : 
-    int a ,b,w;
-    Edge (int a,int b,int w){
-        this->a=a;
-        this->b=b;
-        this->w=w;
-    }
-};
-// for ascending order sort
-bool cmp(Edge a,Edge b){
-    return a.w < b.w;
-};
+const int N = 101;
 
-int dsu_find(int n) {  
-    while(parent[n]!=-1){
-        n=parent[n];
-    }
-    return n;
-}
-void dsu_set(int n){
-    for(int i =0;i<n;i++){
-        parent[i]=-1;
-        parentSize[i]=1;
-    }
-}
+vector<pii> adj[N];
+const long long int INF = LLONG_MAX;
+vector<long long int> dist(N, INF);
 
-void dsu_union(int a,int b){
-    int leaderA=dsu_find(a);
-    int leaderB=dsu_find(b);
-    if(leaderA!=leaderB){
-        if(parentSize[leaderA]>parentSize[leaderB]){
-            parent[leaderB]=leaderA;
-            parentSize[leaderA]+=1;
-        }
-        else{
-            parent[leaderA]=leaderB;
-            parentSize[leaderB]+=1;
+void dijkstra(int source) {
+    priority_queue<pii, vector<pii>, greater<pii>> pq;
+    dist[source] = 0;
+    pq.push({dist[source], source});
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+
+        for (pii vPair : adj[u]) {
+            int v = vPair.first;
+            long long int w = vPair.second;
+            if (dist[v] > dist[u] + w) {
+                dist[v] = dist[u] + w;
+                pq.push({dist[v], v});
+            }
         }
     }
 }
 
 int main() {
-    int n,e;
-    cin>>n>>e;
-    dsu_set(n);
-    vector <Edge> v;
-    vector <Edge > ans;
-    while(e--){
-        int a,b,w;
-        cin>>a>>b>>w;
-        v.push_back(Edge(a,b,w));
+    int v, e;
+    cin >> v >> e;
+
+    for (int i = 0; i < e; i++) {
+        int x, y;
+        long long int w;
+        cin >> x >> y >> w;
+        adj[x].push_back({y, w});
     }
-    sort(v.begin(),v.end(),cmp);
-    for(Edge val:v){
-        // cout <<val.a << " " << val.b << " " <<val.w <<endl;
-        int a=val.a;
-        int b=val.b;
-        int w=val.w;
-        int leaderA=dsu_find(a); 
-        int leaderB=dsu_find(b);
-        if(leaderA==leaderB)continue;
-        ans.push_back(val);
-        dsu_union(a,b); 
-    }
-    for(Edge va:ans){
-        cout <<va.a << " " << va.b << " " <<va.w <<endl;
+
+    int q;
+    cin >> q;
+    while (q--) {
+        int x, y;
+        cin >> x >> y;
+        for (int i = 1; i <= v; i++) {
+            dist[i] = INF;
+        }
+        dijkstra(x);
+
+        if (dist[y] == INF) {
+            cout << -1 << endl;
+        } else {
+            cout << dist[y] << endl;
+        }
     }
 }
