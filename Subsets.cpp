@@ -56,7 +56,9 @@ int main() {
         for (int i = 0; i < N; i++)
             cin >> A[i];
 
-        int sum = accumulate(A.begin(), A.end(), 0);
+        int sum= 0;
+        for (int i = 0; i < N; i++)
+            sum += A[i];
 
         if (sum % 2 != D % 2) {
             cout << 0 << endl;
